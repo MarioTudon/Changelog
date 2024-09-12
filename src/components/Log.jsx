@@ -1,7 +1,7 @@
-function Date({ date }) {
+function DateAndTime({ date, time }) {
     return (
         <>
-            <div className="flex items-center justify-end border-r border-r-slate-900 pr-12 pt-auto pb-auto">{date}</div>
+            <div className="flex items-center justify-end border-r border-r-slate-900 pr-12 pt-auto pb-auto">{date} {time}</div>
         </>
     );
 }
@@ -22,12 +22,12 @@ function Circle() {
     )
 }
 
-function Log({ date, record }) {
+function Log({ date, time, record }) {
     return (
         <>
             <div className="relative grid grid-cols-2 grid-rows-1 h-12 text-lg font-semibold text-slate-700">
-                <Date date={date} />
-                <Circle/>
+                <DateAndTime date={date} time={time} />
+                <Circle />
                 <Record record={record} />
             </div>
         </>

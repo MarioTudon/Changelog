@@ -1,16 +1,41 @@
-const Modal = ({ isOpen, onClose, children }) => {
-    if (!isOpen) return null;
+import { useState } from 'react';
 
-    return (
+const Modal = ({ isOpen, closeModal, inputRef, sendDataToParent }) => {
+    const [date, setDate] = useState("");
+    const [time, setTime] = useState("");
+    const [record, setRecord] = useState("");
+
+    const currentDateAndTime = () => {
+        const date = new Date();
+        const dateFormatter = new Intl.DateTimeFormat("en-US", { dateStyle: 'long', timeZone: 'America/Mexico_city' });
+        const formatedDate = dateFormatter.format(date);
+        const timeFormatter = new Intl.DateTimeFormat("en-US", { timeStyle: 'medium', timeZone: 'America/Mexico_city', hour12: false });
+        const formatedTime = timeFormatter.format(date);
+        const formats = { date: formatedDate, time: formatedTime };
+        return formats;
+    };
+
+    function handleClick() {
+        if (inputRef.current.value === '') { alert('The log cannot be empty'); return; }
+        sendDataToParent(date, time, record);
+        closeModal();
+    }
+
+    function handleChange(e) {
+        setDate(currentDateAndTime().date);
+        setTime(currentDateAndTime().time);
+        setRecord(e.target.value);
+    }
+
+    return isOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-            <div className="bg-white p-6 rounded-lg shadow-lg w-1/3 relative flex flex-col">
-                <h2 className="text-xl font-semibold mb-6">Add a new log</h2>
-                <button className="absolute top-0 left-0 text-gray-500 hover:text-gray-800 text-2xl inline-block" onClick={onClose}> &times; </button>
-                <div className='flex mt-auto'>
-                    <input className='border-slate-900 w-2/3 px-4 border-2 rounded-lg' type="text" name="" id="" maxLength={'50'} placeholder="Enter your log here" />
-                    <button className='ml-auto bg-slate-500 text-slate-100 text-base px-6 py-2 rounded-full hover:scale-110 transition-all hover:bg-slate-600'>Add</button>
+            <div className="bg-white p-6 pt-4 rounded-lg shadow-lg w-1/5 min-w-52 relative flex flex-col">
+                <h2 className="text-xl font-semibold mb-6">Add a New Log</h2>
+                <button className="absolute top-1 right-3 text-gray-500 hover:text-gray-800 text-2xl inline-block" onClick={closeModal}> &times; </button>
+                <div className='flex flex-col mt-auto'>
+                    <input className='border-slate-900 w-full h-9 px-4 border-2 rounded-lg' type="text" name="modal-text-input" id="modal-text-input" maxLength={'50'} placeholder="Enter your log here" ref={inputRef} onChange={handleChange} />
+                    <button className='mr-auto mt-4 bg-slate-500 text-slate-100 text-base px-6 py-2 rounded-full hover:scale-110 transition-all hover:bg-slate-600' onClick={handleClick}>Add</button>
                 </div>
-                {children}
             </div>
         </div>
     );
