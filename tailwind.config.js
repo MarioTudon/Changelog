@@ -9,6 +9,9 @@ module.exports = {
         lg: '24px',
         xl: '48px'
       },
+      maxHeight: {
+        '2/3': '60%',
+      }
     },
   },
   plugins: [],

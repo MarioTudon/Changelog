@@ -4,7 +4,7 @@ function Changelog({ children }) {
 
     return (
         <>
-            <div className='mb-auto'>
+            <div className='mb-auto max-h-2/3 overflow-auto'>
                 <Log date={''} record={''} />
                 {children}
                 <Log date={''} record={''} />

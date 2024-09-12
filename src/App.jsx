@@ -15,7 +15,7 @@ function App() {
 
     function handleDataFromChild(date, time, record) {
         let logsCopy = logs.slice();
-        logsCopy.push(<Log date={date} time={time} record={record} />);
+        logsCopy.unshift(<Log date={date} time={time} record={record} />);
         setLogs(logsCopy);
     }
 
