@@ -11,10 +11,12 @@ function App() {
     const openModal = () => setIsModalOpen(true);
     const closeModal = () => setIsModalOpen(false);
 
-    const [logs, setLog] = useState([<Log date={1} record={1} />, <Log date={2} record={2} />]);
+    const [logs, setLogs] = useState([]);
 
-    function handleDataFromChild(date, time, log) {
-        console.log(date + ' ' + time + ' ' + log);
+    function handleDataFromChild(date, time, record) {
+        let logsCopy = logs.slice();
+        logsCopy.push(<Log date={date} time={time} record={record} />);
+        setLogs(logsCopy);
     }
 
     return (
@@ -25,7 +27,7 @@ function App() {
             <AddLog openModal={openModal} textButton={'Add Log'} inputRef={inputRef} />
             <Changelog>
                 <ul>
-                    {logs.map(log => <li key={log.props.date}>{log}</li>)}
+                    {logs.map(log => <li key={log.props.time}>{log}</li>)}
                 </ul>
             </Changelog>
         </>
