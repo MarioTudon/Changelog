@@ -1,6 +1,7 @@
+import { Children } from 'react';
 import Log from './Log.jsx'
 
-function Changelog() {
+function Changelog({ children }) {
     return (
         <>
             <div className='mb-auto'>
@@ -12,6 +13,7 @@ function Changelog() {
                 <Log date={'August 15, 2024'} record={'Backend Project Ideas'} />
                 <Log date={'August 10, 2024'} record={'Redis roadmap'} />
                 <Log date={'August 1, 2024'} record={'Changelog page to help you stay in the loop'} />
+                {children}
                 <Log date={''} record={''} />
             </div>
         </>

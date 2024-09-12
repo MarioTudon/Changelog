@@ -1,12 +1,13 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import AddLog from './components/AddLog.jsx'
 import Modal from './components/Modal.jsx'
 import Changelog from './components/Changelog.jsx';
 
 function App() {
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const inputRef = useRef(null);
 
-    const openModal = () => setIsModalOpen(true);
+    const openModal = () => setIsModalOpen(true); 
     const closeModal = () => setIsModalOpen(false);
 
     const currentDateAndTime = () => {
@@ -21,12 +22,12 @@ function App() {
 
     return (
         <>
-            <Modal isOpen={isModalOpen} onClose={closeModal}>
-            </Modal>
+            <Modal isOpen={isModalOpen} closeModal={closeModal} inputRef={inputRef}/>
             <h1 className='text-center text-6xl font-semibold text-slate-700'>Changelog</h1>
             <h2 className='mb-auto mt-4 text-xl font-medium text-slate-400'>Here's everything we have shipped in the past few days</h2>
-            <AddLog openModal={openModal} textButton={'Add Log'} />
-            <Changelog />
+            <AddLog openModal={openModal} textButton={'Add Log'} inputRef={inputRef}/>
+            <Changelog>
+            </Changelog>
         </>
     );
 }
