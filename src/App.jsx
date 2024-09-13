@@ -19,10 +19,21 @@ function App() {
         setLogs(logsCopy);
     }
 
+    document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape') {
+            closeModal();
+        }
+    })
+
+    function handleKey(e) {
+        console.log(e.key);
+    }
+
     return (
         <>
             <Modal isOpen={isModalOpen} closeModal={closeModal} inputRef={inputRef} sendDataToParent={handleDataFromChild} />
-            <h1 className='text-center text-6xl font-semibold text-slate-700'>Changelog</h1>
+            <h1 className='text-center text-6xl font-semibold text-slate-700' onKeyDown={handleKey} 
+    tabIndex="0">Changelog</h1>
             <h2 className='mb-auto mt-4 text-xl font-medium text-slate-400'>Here's everything we have shipped in the past few days</h2>
             <AddLog openModal={openModal} textButton={'Add Log'} inputRef={inputRef} />
             <Changelog>
