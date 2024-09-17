@@ -15,12 +15,6 @@ const Modal = ({ isOpen, closeModal, inputRef, sendDataToParent }) => {
         return formats;
     };
 
-    function handleClick() {
-        if (inputRef.current.value === '') { alert('The log cannot be empty'); return; }
-        sendDataToParent(date, time, record);
-        closeModal();
-    }
-
     function handleChange(e) {
         setDate(currentDateAndTime().date);
         setTime(currentDateAndTime().time);
@@ -29,6 +23,12 @@ const Modal = ({ isOpen, closeModal, inputRef, sendDataToParent }) => {
 
     function handleKey(e) {
         if(e.key != 'Enter') return;
+        if (inputRef.current.value === '') { alert('The log cannot be empty'); return; }
+        sendDataToParent(date, time, record);
+        closeModal();
+    }
+
+    function handleClick() {
         if (inputRef.current.value === '') { alert('The log cannot be empty'); return; }
         sendDataToParent(date, time, record);
         closeModal();
