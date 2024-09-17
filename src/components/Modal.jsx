@@ -55,7 +55,7 @@ const Modal = ({ isOpen, closeModal, inputRef, sendDataToParent }) => {
                 <h2 className="text-xl font-semibold mb-6">Add a New Log</h2>
                 <button className="absolute top-1 right-3 text-gray-500 hover:text-gray-800 text-2xl inline-block" onClick={closeModal}> &times; </button>
                 <div className='flex flex-col mt-auto'>
-                    <input className='border-slate-900 w-full h-9 px-4 border-2 rounded-lg' type="text" name="modal-text-input" id="modal-text-input" maxLength={'30'} placeholder="Enter your log here" ref={inputRef} onChange={handleChange} onKeyDown={handleEnterKey}/>
+                    <input className='border-slate-900 w-full h-9 px-4 border-2 rounded-lg' type="text" name="modal-text-input" id="modal-text-input" maxLength={'60'} placeholder="Enter your log here" ref={inputRef} onChange={handleChange} onKeyDown={handleEnterKey}/>
                     <button className='mr-auto mt-4 bg-slate-500 text-slate-100 text-base px-6 py-2 rounded-full hover:scale-110 transition-all hover:bg-slate-600' onClick={handleClick}>Add</button>
                 </div>
             </div>
