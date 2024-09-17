@@ -14,10 +14,12 @@ function App() {
     const [logs, setLogs] = useState([]);
 
     function handleDataFromChild(date, time, record) {
-        let logsCopy = logs.slice();
-        logsCopy.unshift(<Log date={date} time={time} record={record} />);
-        setLogs(logsCopy);
+        setLogs([<Log date={date} time={time} record={record} />, ...logs]);
     }
+
+    function deleteLog(log) {
+        setLogs(logs.filter(l => l.props.time !== log.props.time));
+    };
 
     return (
         <>
@@ -27,7 +29,10 @@ function App() {
             <AddLog openModal={openModal} textButton={'Add Log'} inputRef={inputRef} />
             <Changelog>
                 <ul>
-                    {logs.map(log => <li key={log.props.time}>{log}</li>)}
+                    {logs.map(log =>
+                        <li key={log.props.time} className='group hover:bg-slate-100 relative px-6 rounded-md'>{log}
+                            <button className="absolute top-1/2 right-1 -translate-y-1/2 text-gray-500 hover:text-gray-800 text-3xl opacity-0 group-hover:opacity-100 transition-opacity" title="Delete log" onClick={() => { deleteLog(log) }}> &times; </button>
+                        </li>)}
                 </ul>
             </Changelog>
         </>
