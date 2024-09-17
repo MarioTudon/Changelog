@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import AddLog from './components/AddLog.jsx'
 import Modal from './components/Modal.jsx'
 import Changelog from './components/Changelog.jsx';
@@ -8,7 +8,7 @@ function App() {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const inputRef = useRef(null);
 
-    const openModal = () => setIsModalOpen(true);
+    const openModal = () => { setIsModalOpen(true); setTimeout(() => { inputRef.current?.focus(); }, 0); }
     const closeModal = () => setIsModalOpen(false);
 
     const [logs, setLogs] = useState([]);
