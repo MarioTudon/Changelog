@@ -5,9 +5,9 @@ function Changelog({ children }) {
     return (
         <>
             <div className='mb-auto max-h-2/3 overflow-auto'>
-                <Log date={''} record={''} />
+                <Log date={''} time={''} record={''} />
                 {children}
-                <Log date={''} record={''} />
+                <Log date={''} time={''} record={''} />
             </div>
         </>
     );
