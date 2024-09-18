@@ -6,10 +6,7 @@ import Log from './components/Log.jsx'
 
 function App() {
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const [logs, setLogs] = useState(() => {
-        const storagedLogs = JSON.parse(localStorage.getItem('logs'));
-        return (storagedLogs || []);
-      });
+    const [logs, setLogs] = useState([]);
     const inputRef = useRef(null);
 
     const openModal = () => { setIsModalOpen(true); setTimeout(() => { inputRef.current?.focus(); }, 0); }
