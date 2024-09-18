@@ -6,21 +6,21 @@ import Log from './components/Log.jsx'
 
 function App() {
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [logs, setLogs] = useState([]);
     const inputRef = useRef(null);
 
     const openModal = () => { setIsModalOpen(true); setTimeout(() => { inputRef.current?.focus(); }, 0); }
     const closeModal = () => setIsModalOpen(false);
 
-    const [logs, setLogs] = useState([]);
-
     useEffect(() => {
         localStorage.setItem('logs', JSON.stringify(logs));
+        console.log(JSON.parse(localStorage.getItem('logs')));
     }, [logs]);
 
     useEffect(() => {
-        const storagedItems = JSON.parse(localStorage.getItem('logs'));
-        if (storagedItems) {
-            setLogs(storagedItems);
+        const storagedLogs = JSON.parse(localStorage.getItem('logs'));
+        if (storagedLogs) {
+            setLogs(storagedLogs);
         }
     }, []);
 
