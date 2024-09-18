@@ -8,7 +8,7 @@ function App() {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [logs, setLogs] = useState(() => {
         const storagedLogs = JSON.parse(localStorage.getItem('logs'));
-        return storagedLogs || [];
+        return (storagedLogs || []);
       });
     const inputRef = useRef(null);
 
