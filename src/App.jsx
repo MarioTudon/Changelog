@@ -6,7 +6,7 @@ import Log from './components/Log.jsx'
 
 function App() {
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const [logs, setLogs] = useState([]);   
+    const [logs, setLogs] = useState([]);
     const inputRef = useRef(null);
 
     const openModal = () => { setIsModalOpen(true); setTimeout(() => { inputRef.current?.focus(); }, 0); }
@@ -14,7 +14,6 @@ function App() {
 
     useEffect(() => {
         localStorage.setItem('logs', JSON.stringify(logs));
-        console.log(JSON.parse(localStorage.getItem('logs')));
     }, [logs]);
 
     useEffect(() => {
@@ -41,8 +40,9 @@ function App() {
             <Changelog>
                 <ul>
                     {logs.map(log =>
-                        <li key={log.props.time} className='group hover:bg-slate-100 relative px-10 rounded-md'>{log}
-                            <button className="absolute top-1/2 right-3 -translate-y-1/2 text-gray-500 hover:text-gray-800 text-3xl opacity-0 group-hover:opacity-100 transition-opacity" title="Delete log" onClick={() => { deleteLog(log) }}> &times; </button>
+                        <li key={log.props.time} className='group hover:bg-slate-100 relative px-10 rounded-md'>
+                            {log}
+                            <button className="absolute top-1/2 right-3 -translate-y-1/2 text-gray-500 hover:text-gray-800 text-3xl opacity-0 group-hover:opacity-100 transition-opacity" title="Delete log" onClick={() => { deleteLog(log) }}>&times;</button>
                         </li>)}
                 </ul>
             </Changelog>
