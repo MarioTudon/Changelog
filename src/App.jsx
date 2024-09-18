@@ -18,6 +18,7 @@ function App() {
 
     useEffect(() => {
         const storagedLogs = JSON.parse(localStorage.getItem('logs'));
+        console.log(storagedLogs);
         if (storagedLogs) {
             setLogs(storagedLogs);
         }
