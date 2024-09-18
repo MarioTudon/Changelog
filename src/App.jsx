@@ -18,12 +18,12 @@ function App() {
 
     useEffect(() => {
         localStorage.setItem('logs', JSON.stringify(logs));
+        console.log(logs);
     }, [logs]);
 
     function handleDataFromChild(date, time, record) {
         const newLog = { date, time, record }
         setLogs([newLog, ...logs]);
-        console.log(logs);
     }
 
     function deleteLog(log) {
