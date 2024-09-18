@@ -13,6 +13,17 @@ function App() {
 
     const [logs, setLogs] = useState([]);
 
+    useEffect(() => {
+        localStorage.setItem('logs', JSON.stringify(logs));
+    }, [logs]);
+
+    useEffect(() => {
+        const storagedItems = JSON.parse(localStorage.getItem('logs'));
+        if (storagedItems) {
+            setLogs(storagedItems);
+        }
+    }, []);
+
     function handleDataFromChild(date, time, record) {
         setLogs([<Log date={date} time={time} record={record} />, ...logs]);
     }
