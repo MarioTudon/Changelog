@@ -2,13 +2,14 @@ import { useState, useRef, useEffect } from 'react';
 import AddLog from './components/AddLog.jsx'
 import Modal from './components/Modal.jsx'
 import Changelog from './components/Changelog.jsx';
-import Log from './components/Log.jsx'
+import Log from './components/Log.jsx';
+import ErrorBoundary from './ErrorBoundary.jsx';
 
 function App() {
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const [logs, setLogs] = useState(()=>{
-        const storagedRecord = JSON.parse(localStorage.getItem('logs'));
-        return storagedRecord || []
+    const [logs, setLogs] = useState(() => {
+        const savedLogs = JSON.parse(localStorage.getItem('logs'));
+        return savedLogs || [];
     });
     const inputRef = useRef(null);
 
@@ -20,11 +21,13 @@ function App() {
     }, [logs]);
 
     function handleDataFromChild(date, time, record) {
-        setLogs([<Log date={date} time={time} record={record} />, ...logs]);
+        const newLog = { date, time, record }
+        setLogs([newLog, ...logs]);
+        console.log(logs);
     }
 
     function deleteLog(log) {
-        setLogs(logs.filter(l => l.props.time !== log.props.time));
+        setLogs(logs.filter(l => l.time !== log.time));
     };
 
     return (
@@ -35,11 +38,13 @@ function App() {
             <AddLog openModal={openModal} textButton={'Add Log'} inputRef={inputRef} />
             <Changelog>
                 <ul>
-                    {logs.map(log =>
-                        <li key={log.props.time} className='group hover:bg-slate-100 relative px-10 rounded-md'>
-                            {log}
-                            <button className="absolute top-1/2 right-3 -translate-y-1/2 text-gray-500 hover:text-gray-800 text-3xl opacity-0 group-hover:opacity-100 transition-opacity" title="Delete log" onClick={() => { deleteLog(log) }}>&times;</button>
-                        </li>)}
+                    {
+                        logs.map(log =>
+                            <li key={log.time} className='group hover:bg-slate-100 relative px-10 rounded-md'>
+                                <Log date={log.date} time={log.time} record={log.record} />
+                                <button className="absolute top-1/2 right-3 -translate-y-1/2 text-gray-500 hover:text-gray-800 text-3xl opacity-0 group-hover:opacity-100 transition-opacity" title="Delete log" onClick={() => { deleteLog(log) }}>&times;</button>
+                            </li>)
+                    }
                 </ul>
             </Changelog>
         </>
