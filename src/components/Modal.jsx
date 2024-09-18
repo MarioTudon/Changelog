@@ -3,7 +3,10 @@ import { useEffect, useState } from 'react';
 const Modal = ({ isOpen, closeModal, inputRef, sendDataToParent }) => {
     const [date, setDate] = useState("");
     const [time, setTime] = useState("");
-    const [record, setRecord] = useState("");
+    const [record, setRecord] = useState(()=>{
+        const storagedRecord = JSON.parse(localStorage.getItem('logs'));
+        return storagedRecord || ""
+    });
 
     const currentDateAndTime = () => {
         const newDate = new Date();
@@ -21,6 +24,10 @@ const Modal = ({ isOpen, closeModal, inputRef, sendDataToParent }) => {
             document.removeEventListener('keydown', handleEscapeKey);
         })
     }, []);
+
+    useEffect(()=>{
+        localStorage.setItem('record',JSON.stringify(record))
+    });
 
     function handleChange(e) {
         setDate(currentDateAndTime().date);
