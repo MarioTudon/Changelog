@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 const Modal = ({ isOpen, closeModal, inputRef, sendDataToParent }) => {
     const [date, setDate] = useState("");
     const [time, setTime] = useState("");
+    const [record, setRecord] = useState("");
 
     const currentDateAndTime = () => {
         const newDate = new Date();
