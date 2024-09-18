@@ -4,7 +4,7 @@ const Modal = ({ isOpen, closeModal, inputRef, sendDataToParent }) => {
     const [date, setDate] = useState("");
     const [time, setTime] = useState("");
     const [record, setRecord] = useState(()=>{
-        const storagedRecord = JSON.parse(localStorage.getItem('logs'));
+        const storagedRecord = JSON.parse(localStorage.getItem('record'));
         return storagedRecord || ""
     });
 
