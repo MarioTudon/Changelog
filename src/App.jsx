@@ -7,7 +7,7 @@ import Log from './components/Log.jsx'
 function App() {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [logs, setLogs] = useState(()=>{
-        const storagedRecord = JSON.parse(localStorage.getItem('record'));
+        const storagedRecord = JSON.parse(localStorage.getItem('logs'));
         return storagedRecord || []
     });
     const inputRef = useRef(null);
