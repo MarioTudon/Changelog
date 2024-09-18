@@ -17,7 +17,6 @@ function App() {
 
     useEffect(() => {
         localStorage.setItem('logs', JSON.stringify(logs));
-        console.log(JSON.parse(localStorage.getItem('logs')));
     }, [logs]);
 
     function handleDataFromChild(date, time, record) {
