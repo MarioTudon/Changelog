@@ -6,7 +6,10 @@ import Log from './components/Log.jsx'
 
 function App() {
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const [logs, setLogs] = useState([]);
+    const [logs, setLogs] = useState(() => {
+        const storagedLogs = JSON.parse(localStorage.getItem('logs'));
+        return storagedLogs || [];
+      });
     const inputRef = useRef(null);
 
     const openModal = () => { setIsModalOpen(true); setTimeout(() => { inputRef.current?.focus(); }, 0); }
@@ -16,14 +19,6 @@ function App() {
         localStorage.setItem('logs', JSON.stringify(logs));
         console.log(JSON.parse(localStorage.getItem('logs')));
     }, [logs]);
-
-    useEffect(() => {
-        const storagedLogs = JSON.parse(localStorage.getItem('logs'));
-        console.log(storagedLogs);
-        if (storagedLogs) {
-            setLogs(storagedLogs);
-        }
-    }, []);
 
     function handleDataFromChild(date, time, record) {
         setLogs([<Log date={date} time={time} record={record} />, ...logs]);
